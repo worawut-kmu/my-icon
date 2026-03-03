@@ -1,6 +1,3 @@
-// script.js
-
-// 1. ข้อมูลไอคอน (อย่าวางลืมนำไอคอนทั้งหมดจากโค้ดดั้งเดิมของคุณมาวางทับตรงนี้นะครับ)
 const iconData = [
  // --- UI พื้นฐาน (Basic UI) ---
   { name: 'Home', tags: ['house', 'main', 'index', 'บ้าน'], svg: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>` },
@@ -197,18 +194,15 @@ const iconData = [
   { name: 'Umbrella', tags: ['rain', 'weather', 'protect', 'ร่ม'], svg: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12a10.06 10.06 0 0 0-20 0Z"/><path d="M12 12v8a2 2 0 0 0 4 0"/><path d="M12 2v1"/></svg>` },
 ];
 
-// เตรียมตัวแปรอ้างอิงไปยัง HTML Elements
 const iconGrid = document.getElementById('iconGrid');
 const searchInput = document.getElementById('searchInput');
 const emptyState = document.getElementById('emptyState');
 const emptyMessage = document.getElementById('emptyMessage');
 const toast = document.getElementById('toast');
 
-// 2. ฟังก์ชันแสดงผลไอคอนบนหน้าจอ
 function renderIcons(iconsToRender) {
-    iconGrid.innerHTML = ''; // ล้างค่าเดิมก่อน
+    iconGrid.innerHTML = ''; 
 
-    // จัดการกรณีค้นหาไม่เจอ
     if (iconsToRender.length === 0) {
         iconGrid.classList.add('hidden');
         emptyState.classList.remove('hidden');
@@ -220,17 +214,15 @@ function renderIcons(iconsToRender) {
     emptyState.classList.add('hidden');
 
     iconsToRender.forEach((icon) => {
-        // ปรับแต่ง SVG สำหรับการแสดงผลให้ตรงกับดีไซน์ Tailwind
+        
         const displaySvg = icon.svg.replace(
             'width="24" height="24"', 
             'class="w-8 h-8 md:w-10 md:h-10 text-neutral-600 group-hover:text-neutral-950 transition-colors duration-200"'
         );
 
-        // สร้างปุ่ม (Button)
         const button = document.createElement('button');
         button.className = "group relative flex flex-col items-center justify-center p-6 md:p-8 bg-white border border-neutral-200 rounded-2xl hover:border-neutral-300 hover:shadow-sm transition-all duration-200 ease-out hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-neutral-950";
         
-        // แปลงโค้ด SVG เพื่อป้องกันปัญหาระหว่างส่งค่าเมื่อถูกคลิก
         const safeSvgStr = encodeURIComponent(icon.svg);
 
         button.innerHTML = `
@@ -256,11 +248,9 @@ function renderIcons(iconsToRender) {
         iconGrid.appendChild(button);
     });
 
-    // สร้างไอคอนของ Lucide ขึ้นมาใน DOM ที่เพิ่งถูกสร้าง
     lucide.createIcons();
 }
 
-// 3. ฟังก์ชันการค้นหา
 searchInput.addEventListener('input', (e) => {
     const query = e.target.value.toLowerCase();
     const filteredIcons = iconData.filter(icon => {
@@ -270,13 +260,11 @@ searchInput.addEventListener('input', (e) => {
     renderIcons(filteredIcons);
 });
 
-// ฟังก์ชันสำหรับปุ่มล้างการค้นหา
 function clearSearch() {
     searchInput.value = '';
     renderIcons(iconData);
 }
 
-// 4. ฟังก์ชันคัดลอกโค้ดและการแสดงแจ้งเตือน (Toast)
 function handleCopy(text, buttonElement) {
     const textArea = document.createElement("textarea");
     textArea.value = text;
@@ -286,7 +274,6 @@ function handleCopy(text, buttonElement) {
     try {
         document.execCommand('copy');
         
-        // สลับ UI บนปุ่มให้แสดงคำว่า Copied!
         const defaultState = buttonElement.querySelector('.state-default');
         const copiedState = buttonElement.querySelector('.state-copied');
         
@@ -294,11 +281,9 @@ function handleCopy(text, buttonElement) {
         copiedState.classList.remove('hidden');
         copiedState.classList.replace('opacity-0', 'opacity-100');
 
-        // แสดง Toast แจ้งเตือน
         toast.classList.replace('opacity-0', 'opacity-100');
         toast.classList.replace('translate-y-8', 'translate-y-0');
 
-        // รีเซ็ต UI กลับเป็นเหมือนเดิมหลังจากผ่านไป 2 วินาที
         setTimeout(() => {
             defaultState.classList.remove('hidden');
             copiedState.classList.add('hidden');
@@ -314,6 +299,5 @@ function handleCopy(text, buttonElement) {
     document.body.removeChild(textArea);
 }
 
-// โหลดข้อมูลขึ้นมาแสดงผลครั้งแรก
 renderIcons(iconData);
 lucide.createIcons();
