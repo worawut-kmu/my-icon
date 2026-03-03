@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimal Icons</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="img/iconcoding.png">
+</head>
+<body class="min-h-screen bg-[#FAFAFA] text-neutral-900 font-sans selection:bg-neutral-200">
+
+    <header class="pt-20 pb-12 px-6 max-w-5xl mx-auto text-center">
+        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-4 text-neutral-950">
+            Icons
+        </h1>
+        <p class="text-neutral-500 text-lg mb-10 max-w-xl mx-auto">
+            คลังไอคอน Open Source <br class="hidden sm:block"/>
+            คลิกที่ไอคอนเพื่อคัดลอกโค้ด SVG นำไปใช้ในโปรเจกต์เว็บของคุณได้ทันที
+        </p>
+
+        <div class="relative max-w-md mx-auto group">
+            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-neutral-400 group-focus-within:text-neutral-900 transition-colors">
+                <i data-lucide="search" class="w-5 h-5"></i>
+            </div>
+            <input
+                type="text"
+                id="searchInput"
+                class="w-full pl-12 pr-4 py-3 bg-white border border-neutral-200 rounded-full focus:outline-none focus:ring-2 focus:ring-neutral-950 focus:border-transparent shadow-sm transition-all"
+                placeholder="ค้นหาไอคอน..."
+            />
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-6 pb-24">
+        <div id="iconGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
+            </div>
+
+        <div id="emptyState" class="hidden text-center py-20">
+            <p class="text-neutral-500 text-lg" id="emptyMessage"></p>
+            <button onclick="clearSearch()" class="mt-4 px-4 py-2 text-sm font-medium text-neutral-900 bg-neutral-100 rounded-full hover:bg-neutral-200 transition-colors">
+                ล้างการค้นหา
+            </button>
+        </div>
+    </main>
+
+    <div id="toast" class="fixed bottom-8 left-1/2 transform -translate-x-1/2 px-6 py-3 bg-neutral-900 text-white text-sm font-medium rounded-full shadow-lg flex items-center gap-2 transition-all duration-300 opacity-0 translate-y-8 pointer-events-none z-50">
+        <i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+        คัดลอกโค้ด SVG เรียบร้อยแล้ว!
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
